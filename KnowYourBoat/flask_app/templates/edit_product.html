@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Your Boat</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="d-flex justify-content-around align-items-center col-12">
+        <h1 class="text-center, font-weight-bold">Ahoy, {{user.first_name}}!!!</h1>
+        <div class="d-flex col-2 justify-content-around">
+            <a href="/dashboard" class="btn btn-dark">Dashboard</a>
+            <a href="/logout" class="btn btn-dark">Logout</a>
+        </div>
+
+    </nav>
+    <form action="/update/boat" method="post" class="col-4 p-4 my-4 bg-info text-dark mx-auto">
+        <h2 class="text-dark, font-weight-bold">Update my Boat!</h2>
+        {% with messages = get_flashed_messages(category_filter=['boat']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Please check your information!!</strong>
+
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="d-flex justify-content-between col-15">
+            
+            <input type="hidden" name="id" value={{edit.id}}>
+            
+            <div class="col-10">
+                <div class="form-group">
+                    <label for="name">Product Name:</label>
+                    <input type="text" name="name" class="form-control" value="{{edit.name}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="serial_number">Serial #:</label>
+                    <input type="text" name="serial_number" class="form-control" value="{{edit.serial_number}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="content">
+                        Content ID:
+                    </label>
+                    <input type="text" name="content" class="form-control" value="{{edit.content}}">
+                </div>
+
+                <div class="form-group">
+                    <label for="purchase_date">
+                        Purchase Date:
+                    </label>
+
+                    <input type="date" name="purchase_date" value="{{edit.purchase_date.strftime('%Y-%m-%d')}}" class="form-control">
+                </div>
+                <input type="submit" value="Update" class="btn btn-dark">
+            </div>
+        </div>
+    </form>
+</body>
+</html> 

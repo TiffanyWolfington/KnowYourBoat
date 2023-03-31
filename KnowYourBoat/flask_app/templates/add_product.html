@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Know Your Boat</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <nav class="d-flex justify-content-around align-items-center col-12">
+        <h1 class="text-center, font-weight-bold">Ahoy, {{user.first_name}}!!!</h1>
+        <div class="d-flex col-2 justify-content-around">
+            <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+            <a href="/logout" class="btn btn-info">Logout</a>
+        </div>
+
+    </nav>
+    
+    <form action="/create/boat" method="post" class="col-4 p-3 my-3 bg-info text-dark mx-auto"> 
+        <h2 class="text-dark, font-weight-bold">Rig my boat!</h2>
+        {% with messages = get_flashed_messages(category_filter=['boat']) %}
+            {% if messages %}
+            <div class="alert alert-danger" role="alert">
+                <strong>Please be sure to check your information!</strong>
+                    {% for message in messages %}
+                    <p>{{message}}</p>
+                    {% endfor %}
+            </div>
+            {% endif %}
+        {% endwith %}
+        
+        <div class="d-flex justify-content-between col-15">
+            <div class="col-10">
+                <div class="form-group">
+                    <label for="name">Product Name:</label>
+                    <input type="text" name="name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="serial_number">Serial #:</label>
+                    <input type="text" name="serial_number" class="form-control"></input>
+                    <!-- <textarea name="serial_number"  cols="40" rows="1" class="form-control"></textarea> -->
+                </div>
+                <div class="form-group">
+                    <label for="content">Content ID:</label>
+                    <input type="text" name="content" class="form-control"></input>
+                    <!-- <textarea name="content"  cols="30" rows="1" class="form-control"></textarea> -->
+                </div>
+                <div class="form-group">
+                    <label for="purchase_date">Purchase Date:</label>
+                    <input type="date" name="purchase_date" class="form-control">
+                </div>
+
+                <br>
+                <input type="submit" value="Rig it!" class="btn btn-dark">
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

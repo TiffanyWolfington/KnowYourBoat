@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<div class="bg">
+<body style="height: auto; width: auto;">
+    <nav class="d-flex justify-content-around align-items-center col-12">
+        <h1 class="text-center" style="font-weight: 700;">Ahoy, {{user.first_name}}!!!</h1>
+        
+        <div class="d-flex col-2 justify-content-around">
+            <a href="/new/boat" class="btn btn-dark">Add To Boat</a>
+            <a href="/logout" class="btn btn-dark">Logout</a>
+        </div>
+        
+    </nav>
+    <div class="info">
+        <h6 class="text-center" style="font-size: large;">Here's what you and others have on their boat!</h6>
+    </div>
+
+    <div class="col-9 mx-auto">
+
+        <table class="table table-hover">
+            <thead style="color: white;">
+                
+                <tr style="background-color: rgba(0, 13, 95, 0.795); font-size: larger;">
+                    <th>Product Name</th>
+                    <th>Serial #</th>
+                    <th>Content ID</th>
+                    <th>Purchase Date</th>
+                    <th>Task</th>
+                </tr>
+                
+            </thead>
+            {% for boat in boats %}
+            <tbody>
+                
+                    <tr style="background-color: rgb(183, 207, 235);">
+                        <td>{{boat.name}}</td>
+                        <td>{{boat.serial_number}}</td>
+                        <td>{{boat.content}}</td>
+                        <td>{{boat.purchase_date}}</td>
+                        {% if boat.user_id == session.user_id %}
+                        <td>
+                            <a href="/edit/boat/{{boat.id}}" style="color: navy; margin-right: 15px;">Edit</a>
+                            <a href="/destroy/boat/{{boat.id}}" style="color: navy;">Delete</a>
+                        </td>
+                        {% endif %}
+                    </tr>
+                
+            </tbody>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</div>
+</html>
